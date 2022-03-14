@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Loading from '../components/Loading';
 import { createUser } from '../services/userAPI';
 
-class Login extends React.Component {
+class Login extends Component {
   constructor() {
     super();
     this.onHandleClick = this.onHandleClick.bind(this);

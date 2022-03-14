@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Header from '../components/Header';
 
-class Favorites extends React.Component {
+class Favorites extends Component {
   render() {
     return (
       <div data-testid="page-favorites">
