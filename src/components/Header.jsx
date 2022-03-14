@@ -27,9 +27,9 @@ class Header extends Component {
         {isLoading ? <Loading /> : (
           <nav>
             <span data-testid="header-user-name">{user}</span>
-            <Link to="/search" data-testid="link-to-search" />
-            <Link to="/favorites" data-testid="link-to-favorites" />
-            <Link to="/profile" data-testid="link-to-profile" />
+            <Link to="/search" data-testid="link-to-search">Search</Link>
+            <Link to="/favorites" data-testid="link-to-favorites">Favorites</Link>
+            <Link to="/profile" data-testid="link-to-profile">Profile</Link>
           </nav>
         ) }
       </header>
