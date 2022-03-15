@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Loading from '../components/Loading';
 import { createUser } from '../services/userAPI';
 
 class Login extends Component {
   constructor() {
     super();
-    this.onHandleClick = this.onHandleClick.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
+    this.onHandleClick = this.onHandleClick.bind(this);
     this.validateInput = this.validateInput.bind(this);
     this.state = {
       loginName: '',
       isButtonDisabled: true,
       isLoading: false,
-      isAuth: false,
     };
   }
 
@@ -25,15 +24,11 @@ class Login extends Component {
 
   onHandleClick(event) {
     event.preventDefault();
+    const { history } = this.props;
     const { loginName } = this.state;
-    this.setState(({
-      isLoading: true,
-    }), async () => {
+    this.setState({ isLoading: true }, async () => {
       await createUser({ name: loginName });
-      this.setState({
-        isLoading: false,
-        isAuth: true,
-      });
+      history.push('/search');
     });
   }
 
@@ -46,7 +41,7 @@ class Login extends Component {
   }
 
   render() {
-    const { isLoading, isAuth, loginName, isButtonDisabled } = this.state;
+    const { isLoading, loginName, isButtonDisabled } = this.state;
     return (
       <div data-testid="page-login">
         {isLoading ? <Loading /> : (
@@ -71,10 +66,14 @@ class Login extends Component {
             </button>
           </div>
         ) }
-        {isAuth && <Redirect to="/search" /> }
+        {/* {isAuth && <Redirect to="/search" /> } */}
       </div>
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.object,
+}.isRequired;
 
 export default Login;
