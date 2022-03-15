@@ -28,7 +28,7 @@ class Profile extends Component {
         <Header />
         { isLoading ? <Loading /> : (
           <section>
-            <img src={ image } alt="" data-testid="profile-image" />
+            <img src={ image } alt={ name } data-testid="profile-image" />
             <Link to="/profile/edit">
               <button type="submit">Editar perfil</button>
             </Link>
