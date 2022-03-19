@@ -16,7 +16,7 @@ class ProfileEdit extends Component {
       name: '',
       email: '',
       description: '',
-      isButtonDisabled: true,
+      isButtonDisabled: false,
     };
   }
 
@@ -29,7 +29,7 @@ class ProfileEdit extends Component {
       name,
       email,
       description,
-    });
+    }, this.validateForm);
   }
 
   onInputChange({ target: { type, name, value, checked } }) {
@@ -38,10 +38,10 @@ class ProfileEdit extends Component {
     }, this.validateForm);
   }
 
-  async onButtonSaveClick(event) {
-    event.preventDefault();
+  async onButtonSaveClick() {
     const { history } = this.props;
     const { image, name, email, description } = this.state;
+    this.setState({ isLoading: true });
     await updateUser({ image, name, email, description });
     history.push('/profile');
   }
@@ -105,12 +105,12 @@ class ProfileEdit extends Component {
                 />
               </fieldset>
               <button
-                type="submit"
+                type="button"
                 onClick={ this.onButtonSaveClick }
                 disabled={ isButtonDisabled }
                 data-testid="edit-button-save"
               >
-                Editar perfil
+                Salvar
 
               </button>
             </form>
